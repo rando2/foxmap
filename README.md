@@ -3,7 +3,7 @@
 These are the essential scripts developed in the assembly of the red fox genome. They are made available here in case they can be useful for future analyses. 
 
 <b>essential_mods.py</b> is a set of very simple functions that we used to pull sequence from the scaffolds and orient it appropriately.<br> 
-<b>racaout_to_csv.py</b> takes RACA's output files and transforms them to a csv format that is easier to use for analysis (in Excel, Python, R, etc.)
+<b>racaout_to_csv.py</b> takes RACA's output files and transforms them to a csv format that is easier to use for analysis (in Excel, Python, R, etc.)<br>
 <b>make-frags.py</b> takes the scaffolds and the RACA input to make the fasta files that comprise 1) RACA's assembly, and 2) the chromosome fragment assembly. It depends on:<br>
 <ol>
   <li>A comma-separated file (here: racafrag_foxfrag.csv) that specifies the relationship between RACA fragments and fox fragments. It shoudl have a header (Fragment,FoxSeg) and each line should list the RACA Fragment and its associated Chromosomal Fragment (e.g. 26a,10</li>
