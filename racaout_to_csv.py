@@ -1,4 +1,3 @@
-__author__ = 'rando2'
 import csv
 """This program converts RACA's output files to a csv-readable format"""
 
