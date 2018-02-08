@@ -2,14 +2,16 @@
 
 These are the essential scripts developed in the assembly of the red fox genome. They are made available here in case they can be useful for future analyses. 
 
-essential_mods.py is a set of very simple functions that we used to pull sequence from the scaffolds and orient it appropriately. 
-racaout_to_csv.py takes RACA's output files and transforms them to a csv format that is easier to use for analysis (in Excel, Python, R, etc.)
-make-frags.py takes the scaffolds and the RACA input to make the fasta files that comprise 1) RACA's assembly, and 2) the chromosome fragment assembly. It depends on:
-a) A comma-separated file (here: racafrag_foxfrag.csv) that specifies the relationship between RACA fragments and fox fragments. It shoudl have a header (Fragment,FoxSeg) and each line should list the RACA Fragment and its associated Chromosomal Fragment (e.g. 26a,10a)
-b) Syntenic relationships between the dog (reference) and fox (target) species, which are hard-coded into the script here (line 113)
-c) the essential_mods.py functions
-d) RACA's output
-e) The scaffolds
+<b>essential_mods.py</b> is a set of very simple functions that we used to pull sequence from the scaffolds and orient it appropriately.<br> 
+<b>racaout_to_csv.py</b> takes RACA's output files and transforms them to a csv format that is easier to use for analysis (in Excel, Python, R, etc.)
+<b>make-frags.py</b> takes the scaffolds and the RACA input to make the fasta files that comprise 1) RACA's assembly, and 2) the chromosome fragment assembly. It depends on:<br>
+<ol>
+  <li>A comma-separated file (here: racafrag_foxfrag.csv) that specifies the relationship between RACA fragments and fox fragments. It shoudl have a header (Fragment,FoxSeg) and each line should list the RACA Fragment and its associated Chromosomal Fragment (e.g. 26a,10</li>
+  <li>Syntenic relationships between the dog (reference) and fox (target) species, which are hard-coded into the script here as a list (line 113)</li>
+  <li>the essential_mods.py functions</li>
+  <li>RACA's output</li>
+  <li>The scaffolds</li>
+  </ol>
 
 You can reach out to me at rando2 at Illinois dot edu if you have any questions.
 
