@@ -32,33 +32,32 @@ with gzip.open(infile) as vcffile, open(outfile, 'wb') as outfile:
     lastscaff= ""
     scaffinfo = []
     for line in vcf:
-        if line[0][0:2]=="##":
+        if line[0][0]=="#": #all the headerlines
             writerbot.writerow(line)
             continue
-        if len(header) == 0:
-            header = line
-            writerbot.writerow(line)
-            continue
-
         scaff, pos = line[0:2]
         pos = int(pos)
 
-        if scaff != lastscaff:
-            print scaff #to keep track
-            lastscaff = scaff
-            scaffinfo = scaff_pos[scaff]
+        if scaff not in scaff_pos.keys():
+            print "no conversion for", scaff
+            continue
+        elif scaff != lastscaff or pos > match[1] : #if it's a new scaffold or new syntenic block, udpate the information
+            if scaff != lastscaff: #if we're on a new scaffold, update that information
+                print scaff
+                lastscaff = scaff
+                scaffinfo = scaff_pos[scaff]
+            match = [] #identifiy new syntenic block
+            for synt in scaffinfo: #for each syntenic block associated with this scaffold
+                if synt[0] <= pos and synt[1] >= pos: #check the position of this position relative to the sb bounds
+                    match = synt
 
-        match = [] #syntenic block will be kept here
-        for synt in scaffinfo:
-            if synt[0] <= pos and synt[1] >= pos:
-                match = synt
+            if len(match) ==0: #if it didn't find an overlapping match
+                print "no match", scaff, pos, scaffinfo
+                continue
 
-        if len(match) ==0:
-            print "no match", scaff, pos, scaffinfo #for spot-checking issues
-        else:
-            chrom = match[3]
-            if match[2] == "+":
-                newpos = match[4] + (pos - match[0]) # if it's position 1 in vcf, it should be good (+0)
-            elif match[2] == "-":
-                newpos = match[5] - (pos - match[0] - 1) #if it's position 1 in vcf, it should be last - 0
-            writerbot.writerow([chrom, newpos] + line[2:])
+        chrom = match[3] #now, the chromosome can be identified from the syntenic block
+        if match[2] == "+": #based on direction, calculate the position given the sb position
+            newpos = match[4] + (pos - match[0]) # if it's position 1 in vcf, it should be good (+0)
+        elif match[2] == "-":
+            newpos = match[5] - (pos - match[0] - 1) #if it's position 1 in vcf, it should be last - 0
+        writerbot.writerow([chrom, newpos] + line[2:])
