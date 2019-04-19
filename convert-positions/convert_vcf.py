@@ -7,7 +7,7 @@ Adjusted positions are on the chromosome fragments of vv2.4 (Rando et al., 2018)
 The output is a new vcf file. Only the first two columns are modified
 The vv2.4 assembly does not include all scaffolds, so any SNV on scaffolds without positions on the chromosomes are skipped
 """
-#change this to your file (it assumes gzip, but can be modified for .vcf by changing syntax on line 26 to open(infile, 'rb')
+#change this to your file (it assumes gzip, but can be modified for .vcf by changing syntax on line 29 to open(infile, 'rb')
 infile='fox5k.quantfilt.recode.vcf.gz'
 
 #outfile is not set up to be compressed, you can modify using gzip (https://docs.python.org/3/library/gzip.html) 
